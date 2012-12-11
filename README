@@ -1,0 +1,33 @@
+sfb-propertyeditors
+===================
+
+Often you need to map empty strings to null, when you map input date from html
+forms to Java objects. This library provides two classes that help you.
+
+com.github.stefanbirkner.editors.SfbEnumEditor
+----------------------------------------------
+
+A SfbEnumEditor is a property editor for enums. The only difference to Java's
+built-in editor is that it maps empty strings to null.
+
+com.github.stefanbirkner.editors.EmptyStringToNullEditor
+--------------------------------------------------------
+
+An EmptyStringToNullEditor is a wrapper for building PropertyEditors that
+handle setAsText("") like setAsText(null).
+
+Wrap the original editor with the EmptyStringToNullEditor:
+  PropertyEditor wrappedEditor = new EmptyStringToNullEditor(originalEditor);
+
+When somebody calls setAsText("") on the wrappedEditor, then it calls
+setAsText(null) on the originalEditor. All other values and all other methods
+are delegated to the originalEditor.
+
+Use the Maven repository
+------------------------
+
+<dependency>
+  <groupId>com.github.stefanbirkner</groupId>
+  <artifactId>sfb-propertyeditors</artifactId>
+  <version>1.0</version>
+<dependency>
