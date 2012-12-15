@@ -23,6 +23,13 @@ When somebody calls setAsText("") on the wrappedEditor, then it calls
 setAsText(null) on the originalEditor. All other values and all other methods
 are delegated to the originalEditor.
 
+com.github.stefanbirkner.editors.EnumEditor
+----------------------------------------------
+
+It is a replacement for Java's built-in enum editor. Java's editor is only an
+internal class and therefore should not be used outside of Java. This class is
+expected to be used by you.
+
 Use the Maven repository
 ------------------------
 
