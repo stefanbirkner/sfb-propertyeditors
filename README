@@ -44,5 +44,5 @@ Use the Maven repository
 <dependency>
   <groupId>com.github.stefanbirkner</groupId>
   <artifactId>sfb-propertyeditors</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
 <dependency>
