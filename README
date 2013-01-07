@@ -1,8 +1,16 @@
 sfb-propertyeditors
 ===================
 
-Often you need to map empty strings to null, when you map input date from html
-forms to Java objects. This library provides two classes that help you.
+This small library has a few classes for everybody who is working with
+PropertyEditors.
+
+com.github.stefanbirkner.editors.SfbPropertyEditorSupport
+---------------------------------------------------------
+
+The SfbPropertyEditorSupport makes it easy to create your own
+PropertyEditorSupport. You only have to override parseText(String).
+Listener support and storing of the value is already done by
+SfbPropertyEditorSupport.
 
 com.github.stefanbirkner.editors.SfbEnumEditor
 ----------------------------------------------
