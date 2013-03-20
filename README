@@ -8,8 +8,8 @@ com.github.stefanbirkner.editors.SfbPropertyEditorSupport
 ---------------------------------------------------------
 
 The SfbPropertyEditorSupport makes it easy to create your own
-PropertyEditorSupport. You only have to override parseText(String).
-Listener support and storing of the value is already done by
+PropertyEditorSupport. You only have to provider a mapper that maps Strings
+to objects. Listener support and storing of the value is already done by
 SfbPropertyEditorSupport.
 
 com.github.stefanbirkner.editors.SfbEnumEditor
@@ -18,18 +18,15 @@ com.github.stefanbirkner.editors.SfbEnumEditor
 A SfbEnumEditor is a property editor for enums. The only difference to Java's
 built-in editor is that it maps empty strings to null.
 
-com.github.stefanbirkner.editors.EmptyStringToNullEditor
---------------------------------------------------------
+com.github.stefanbirkner.editors.PropertyEditorWithMapper
+---------------------------------------------------------
 
-An EmptyStringToNullEditor is a wrapper for building PropertyEditors that
-handle setAsText("") like setAsText(null).
+An PropertyEditorWithMapper modifies the text input and output of another
+PropertyEditor. A configurable mapper is used for the mapping.
 
-Wrap the original editor with the EmptyStringToNullEditor:
-  PropertyEditor wrappedEditor = new EmptyStringToNullEditor(originalEditor);
-
-When somebody calls setAsText("") on the wrappedEditor, then it calls
-setAsText(null) on the originalEditor. All other values and all other methods
-are delegated to the originalEditor.
+When somebody calls setAsText(...) on the new editor, then it uses the mapper
+to modify the text before it is supplied to the original PropertyEditor. The
+same happens when somebody calls getAsText().
 
 com.github.stefanbirkner.editors.EnumEditor
 ----------------------------------------------
@@ -44,5 +41,5 @@ Use the Maven repository
 <dependency>
   <groupId>com.github.stefanbirkner</groupId>
   <artifactId>sfb-propertyeditors</artifactId>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
 </dependency>

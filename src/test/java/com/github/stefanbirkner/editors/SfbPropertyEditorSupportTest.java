@@ -2,13 +2,17 @@ package com.github.stefanbirkner.editors;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -20,18 +24,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.github.stefanbirkner.editors.mapper.Mapper;
+
 public class SfbPropertyEditorSupportTest {
 	private static final ArbitraryClass ARBITRARY_OBJECT = new ArbitraryClass();
 	private static final String ARBITRARY_TEXT = "arbitrary text";
 	private final OurPropertyChangeListener firstListener = new OurPropertyChangeListener();
 	private final OurPropertyChangeListener secondListener = new OurPropertyChangeListener();
+	@SuppressWarnings("unchecked")
+	private final Mapper<ArbitraryClass> mapper = mock(Mapper.class);
 	private final PropertyEditor editor = new SfbPropertyEditorSupport<ArbitraryClass>(
-			ArbitraryClass.class) {
-		public ArbitraryClass parseText(String text) {
-			return ARBITRARY_OBJECT;
-		}
-	};
-	
+			ArbitraryClass.class, mapper);
+
 	@Rule
 	public final ExpectedException thrown = none();
 
@@ -41,12 +45,12 @@ public class SfbPropertyEditorSupportTest {
 		assertThat(editor,
 				hasProperty("value", is(sameInstance(ARBITRARY_OBJECT))));
 	}
-	
+
 	@Test
 	public void storesValueWhichIsInstanceOfSubclass() {
 		editor.setValue(new ArbitrarySubClass());
 	}
-	
+
 	@Test
 	public void rejectsValueOfWrongType() {
 		thrown.expect(IllegalArgumentException.class);
@@ -73,21 +77,17 @@ public class SfbPropertyEditorSupportTest {
 	}
 
 	@Test
-	public void providesNullAsTextForNull() {
-		editor.setValue(null);
-		assertEditorReturnsNullForProperty("asText");
+	public void mapsValueToTextUsingMapper() {
+		when(mapper.getTextForValue(ARBITRARY_OBJECT)).thenReturn(ARBITRARY_TEXT);
+		editor.setValue(ARBITRARY_OBJECT);
+		assertThat(editor, hasProperty("asText", is(equalTo(ARBITRARY_TEXT))));
 	}
 
 	@Test
-	public void usesValuesToStringForAsText() {
-		ArbitraryClass object = new ArbitraryClass() {
-			@Override
-			public String toString() {
-				return ARBITRARY_TEXT;
-			}
-		};
-		editor.setValue(object);
-		assertThat(editor, hasProperty("asText", is(equalTo(ARBITRARY_TEXT))));
+	public void mapsTextToValueUsingMapper() {
+		when(mapper.getValueForText(ARBITRARY_TEXT)).thenReturn(ARBITRARY_OBJECT);
+		editor.setAsText(ARBITRARY_TEXT);
+		assertThat(editor, hasProperty("value", is(equalTo(ARBITRARY_OBJECT))));
 	}
 
 	@Test

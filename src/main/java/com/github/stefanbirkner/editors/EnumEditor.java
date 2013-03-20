@@ -1,6 +1,6 @@
 package com.github.stefanbirkner.editors;
 
-import static java.lang.Enum.valueOf;
+import com.github.stefanbirkner.editors.mapper.EnumMapper;
 
 /**
  * This {@code EnumEditor} is a replacement for Java's built-in enum editor.
@@ -11,17 +11,10 @@ import static java.lang.Enum.valueOf;
  * 
  * @param <E>
  *            the enum to be edited.
+ * @since 1.0.0
  */
 public class EnumEditor<E extends Enum<E>> extends SfbPropertyEditorSupport<E> {
-	private final Class<E> type;
-
 	public EnumEditor(Class<E> type) {
-		super(type);
-		this.type = type;
-	}
-
-	@Override
-	protected E parseText(String text) {
-		return (text == null) ? null : valueOf(type, text);
+		super(type, new EnumMapper<E>(type));
 	}
 }
