@@ -1,0 +1,44 @@
+---
+layout: page
+title: Get SFB Property Editors 
+headline: Get SFB Property Editors
+---
+<p>The SFB Property Editors library is available from the Maven repository.</p>
+
+<h3>Download</h3>
+<ul>
+  <li><a href="http://search.maven.org/remotecontent?filepath=com/github/stefanbirkner/sfb-propertyeditors/2.0.0/sfb-propertyeditors-2.0.0.jar">sfb-propertyeditors-2.0.0.jar</a></li>
+  <li><a href="http://search.maven.org/remotecontent?filepath=com/github/stefanbirkner/sfb-propertyeditors/2.0.0/sfb-propertyeditors-2.0.0-javadoc.jar">sfb-propertyeditors-2.0.0-javadoc.jar</a></li>
+  <li><a href="http://search.maven.org/remotecontent?filepath=com/github/stefanbirkner/sfb-propertyeditors/2.0.0/sfb-propertyeditors-2.0.0-sources.jar">sfb-propertyeditors-2.0.0-sources.jar</a></li>
+</ul>
+
+<h3>Use in Maven</h3>
+{% highlight xml %}
+<dependency>
+  <groupId>com.github.stefanbirkner</groupId>
+  <artifactId>sfb-propertyeditors</artifactId>
+  <version>2.0.0</version>
+</dependency>
+{% endhighlight %}
+
+<h3>Use in Buildr</h3>
+<pre>'com.github.stefanbirkner:sfb-propertyeditors:jar:2.0.0'</pre>
+
+<h3>Use in Ivy</h3>
+{% highlight xml %}
+<dependency org="com.github.stefanbirkner" name="sfb-propertyeditors" rev="2.0.0">
+  <artifact name="sfb-propertyeditors" type="jar"/>
+</dependency>
+{% endhighlight %}
+
+<h3>Use in Groovy Grape</h3>
+{% highlight groovy %}
+@Grapes(
+  @Grab(group='com.github.stefanbirkner', module='sfb-propertyeditors', version='2.0.0')
+)
+{% endhighlight %}
+
+<h3>Use in Grails</h3>
+{% highlight groovy %}
+compile 'com.github.stefanbirkner:sfb-propertyeditors:2.0.0'
+{% endhighlight %}

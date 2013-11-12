@@ -1,0 +1,71 @@
+---
+title: SFB Property Editors
+---
+<!DOCTYPE html>
+<html>
+<head>
+  {% include basicHead.html %}
+  <link rel="stylesheet" href="bootstrap-theme.min.css" />
+</head>
+<body>
+  {% include navbar.html %}
+  <div class="container">
+    <header>
+      <div class="jumbotron">
+        <h1>SFB Property Editors</h1>
+        <p>The easy way to implement text based <a href="http://docs.oracle.com/javase/7/docs/api/java/beans/PropertyEditor.html">Java Property Editors.</a></p>
+      </div>
+    </header>
+
+		<section>
+			<p>The tiny SFB Property Editors library helps you in two ways:
+				<ul>
+					<li>It separates the mapping between objects and texts from 
+					the common PropertyEditor code.</li>
+					<li>It provides some frequently used PropertyEditors.</li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+			<h2>Use a Mapper for Creating a Property Editor</h2>
+			<p>Start with implementing the interface
+			<a href="apidocs/index.html?com/github/stefanbirkner/editors/mapper/Mapper.html"><code>com.github.stefanbirkner.editors.mapper.Mapper&lt;T&gt;.</code></a>
+			This interface is parameterized with the type that is mapped and it has two methods: <code>getTextForValue(T value)</code> and <code>getValueForText(String text).</code> The first one returns the text for an object and the second returns an object based on the text. The following example shows a Mapper for Longs.</p>
+		{% highlight java %}class LongMapper implements Mapper<Long> {
+  @Override
+  public String getTextForValue(Long value) {
+    if (value == null)
+      return "";
+    else
+      return value.toString();
+  }
+
+  @Override
+  public Long getValueForText(String text) {
+    if ((text == null) || text.isEmpty())
+      return null;
+    else
+      return Long.parseLong(text);
+  }
+}{% endhighlight %}
+			<p>The new mapper can be used to create a property editor. You just need to create an instance of <a href="apidocs/index.html?com/github/stefanbirkner/editors/SfbPropertyEditorSupport.html"><code>com.github.stefanbirkner.editors.SfbPropertyEditorSupport&lt;T&gt;.</code></a></p>
+			{% highlight java %}PropertyEditor editor = new SfbPropertyEditorSupport<Long>(Long.class, new LongMapper());{% endhighlight %}
+			<p>Maybe you want to create an dedicated property editor for <code>java.lang.Long</code>:</p>
+			{% highlight java %}public class LongPropertyEditor extends SfbPropertyEditorSupport<Long> {
+  public LongPropertyEditor() {
+    super(Long.class, new LongMapper());
+  }
+}{% endhighlight %}
+		</section>
+
+		<section>
+      <h2>Author</h2>
+      <p><a href="http://www.stefan-birkner.de">Stefan Birkner</a> (mail@stefan-birkner.de)</p>
+		</section>
+  </div>
+
+  <script src="bootstrap.min.js"></script>
+  {% include tracking.html %}
+</body>
+</html>
