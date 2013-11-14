@@ -17,10 +17,8 @@ import org.junit.rules.ExpectedException;
 import com.github.stefanbirkner.editors.mapper.Mapper;
 
 public class PropertyEditorWithMapperTest {
-	private static final Integer ARBITRARY_NUMBER = 25907;
 	private static final String ARBITRARY_TEXT = "5tfc2dfa";
 	private static final String ANOTHER_ARBITRARY_TEXT = "another arbitrary text";
-	private static final String EMPTY_STRING = "";
 	private final PropertyEditor originalEditor = mock(PropertyEditor.class);
 	@SuppressWarnings("unchecked")
 	private final Mapper<String> mapper = mock(Mapper.class);
