@@ -10,7 +10,7 @@ package com.github.stefanbirkner.editors;
  * @param <E> the enum to be mapped.
  */
 public class SfbEnumEditor<E extends Enum<E>> extends EmptyStringToNullEditor {
-	public SfbEnumEditor(Class<? extends Enum<E>> enumClass) {
-		super(new EnumEditor(enumClass));
+	public SfbEnumEditor(Class<E> enumClass) {
+		super(new EnumEditor<E>(enumClass));
 	}
 }
