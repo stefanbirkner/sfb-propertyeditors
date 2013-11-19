@@ -1,6 +1,4 @@
 language: java
-install: gradle -PsonatypeUsername='' -PsonatypePassword='' assemble
-script: gradle -PsonatypeUsername='' -PsonatypePassword='' test
 jdk:
   - oraclejdk7
   - openjdk7
