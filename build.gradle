@@ -58,7 +58,7 @@ uploadArchives {
                packaging 'jar'
                description 'A few classes for everybody who is working with property editors.'
                url 'http://stefanbirkner.github.io/sfb-propertyeditors/'
-               inceptionYear '2011'
+               inceptionYear '2012'
 
                scm {
                    url 'https://github.com/stefanbirkner/sfb-propertyeditors/'
