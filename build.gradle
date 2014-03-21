@@ -29,10 +29,10 @@ artifacts {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version:'[4.11,)'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version:'[1.3,)'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version:'[1.3,)'
-    testCompile group: 'org.mockito', name: 'mockito-core', version:'[1.9.5,)'
+    testCompile group: 'junit', name: 'junit', version: '[4.11,)'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '[1.3,)'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '[1.3,)'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '[1.9.5,)'
 }
 
 repositories {
@@ -50,40 +50,40 @@ uploadArchives {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-              authentication(userName: sonatypeUsername, password: sonatypePassword)
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
 
             pom.project {
-               name 'sfb-propertyeditors'
-               packaging 'jar'
-               description 'A few classes for everybody who is working with property editors.'
-               url 'http://stefanbirkner.github.io/sfb-propertyeditors/'
-               inceptionYear '2012'
+                name 'sfb-propertyeditors'
+                packaging 'jar'
+                description 'A few classes for everybody who is working with property editors.'
+                url 'http://stefanbirkner.github.io/sfb-propertyeditors/'
+                inceptionYear '2012'
 
-               scm {
-                   url 'https://github.com/stefanbirkner/sfb-propertyeditors/'
-                   connection 'scm:git:git://github.com/stefanbirkner/sfb-propertyeditors.git'
-                   developerConnection 'scm:git:git@github.com:stefanbirkner/sfb-propertyeditors.git'
-               }
+                scm {
+                    url 'https://github.com/stefanbirkner/sfb-propertyeditors/'
+                    connection 'scm:git:git://github.com/stefanbirkner/sfb-propertyeditors.git'
+                    developerConnection 'scm:git:git@github.com:stefanbirkner/sfb-propertyeditors.git'
+                }
 
-               licenses {
-                   license {
-                       name 'Apache License, Version 2.0'
-                       url 'http://www.apache.org/licenses/LICENSE-2.0'
-                       distribution 'repo'
-                   }
-               }
+                licenses {
+                    license {
+                        name 'Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0'
+                        distribution 'repo'
+                    }
+                }
 
-               developers {
-                   developer {
-                       id 'stefanbirkner'
-                       name 'Stefan Birkner'
-                       email 'mail@stefan-birkner.de'
-                       url 'http://www.stefan-birkner.de'
-                       timezone '+1'
-                   }
-               }
-           }
+                developers {
+                    developer {
+                        id 'stefanbirkner'
+                        name 'Stefan Birkner'
+                        email 'mail@stefan-birkner.de'
+                        url 'http://www.stefan-birkner.de'
+                        timezone '+1'
+                    }
+                }
+            }
         }
     }
 }
